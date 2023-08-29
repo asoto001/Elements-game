@@ -5,46 +5,90 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="./scripts/index.js"></script>
+    <link rel="stylesheet" href="./styles/styles.css">
     <title>Elelments</title>
 </head>
 
 <body>
-    <h1>Elementes! 🔥💧🌱🌪</h1>
+    <main class="main-sec">
+        <section id="figther-slect-sec" class="figther-slect-sec">
+            <h1>Elementes! 🔥💧🌱🌪</h1>
+            <h2>Elige a tu peleador:</h2>
 
-    <section class="figther-slect-sec">
-        <h2>Elige a tu peleador:</h2>
+            <div class="cards-container">
+                <input type="radio" name="peleador" id="Anng" />
+                <label class="figther-card ang" for="Anng">
+                    <p>Anng</p>
+                    <img src="./images/Ang1.png" alt="">
+                </label>
 
-        <label for="Anng">Anng</label>
-        <input type="radio" name="peleador" id="Anng" />
-        <label for="Kioshy">Kioshy</label>
-        <input type="radio" name="peleador" id="Kioshy" />
-        <label for="Korra">Korra</label>
-        <input type="radio" name="peleador" id="Korra" />
-        <label for="Roku">Roku</label>
-        <input type="radio" name="peleador" id="Roku" />
+                <input type="radio" name="peleador" id="Kioshy" />
+                <label class="figther-card kioshy" for="Kioshy">
+                    <p>Kioshy</p>
+                    <img src="./images/Kyoshi1.png" alt="">
+                </label>
+                
+                <input type="radio" name="peleador" id="Korra" />
+                <label class="figther-card korra" for="Korra">
+                    <p>Korra</p>
+                    <img src="./images/Korra1.png" alt="">
+                </label>
 
-        <button id="btn" class="figther-slect-sec__btn">Seleccionar</button>
-    </section>
+                <input type="radio" name="peleador" id="Roku" />
+                <label class="figther-card roku" for="Roku">
+                    <p>Roku</p>
+                    <img src="./images/Roku.png" alt="">
+                </label>
+            </div>
 
-    <section class="attack-selec-sec">
+            <button id="btn" class="figther-slect-sec__btn">Seleccionar</button>
+        </section>
 
-        <h2>Elige a tu Ataque:</h2>
+        <section id="attackSelecSec" class="attack-selec-sec">
+            <h1>Elementes! 🔥💧🌱🌪</h1>
 
-        <p>Tu pelador <span id="fPName"></span>, tiene <span>3</span> vidas</p>
-        <p>El pelador enemigo <span id="fEName"></span>, tiene <span>3</span> vidas</p>
+            <h2>Elige a tu Ataque:</h2>
 
-        <p class="btns">
-            <button class="btns__fire" id="fire">Fuego 🔥</button>
-            <button class="btns__water" id="water">Agua 💧</button>
-            <button class="btns__earth" id="earth">Tierra🌱</button>
-            <button class="btns__wind" id="wind">Aire 🌪</button>
-        </p>
-    </section>
+            <p class="btns-atacks">
+                <button class="btns-atacks__fire btns" id="fire">Fuego 🔥</button>
+                <button class="btns-atacks__water btns" id="water">Agua 💧</button>
+                <button class="btns-atacks__earth btns" id="earth">Tierra🌱</button>
+                <button class="btns-atacks__wind btns" id="wind">Aire 🌪</button>
+            </p>
 
-    <section id="messages" class="messages">
-        <!-- <p>tu peleador ataco con aire</p> -->
-    </section>
+           <section class="score-board">
+            <div>
+                <p class="lifes-score player">Tu pelador <span id="fPName"></span>, tiene <span
+                        id="player-lifes">3</span>
+                    vidas</p>
+                <p id="playerAtacks"></p>
+
+            </div>
+
+            <div id="messages" class="messages">
+                <!-- <p>tu peleador ataco con aire</p> -->
+                <p id="result"></p>
+
+            </div>
+
+            <div>
+                <p class="lifes-score enemy">El pelador enemigo <span id="fEName"></span>, tiene <span
+                        id="Enemi-lifes">3</span> vidas</p>
+                <p id="enemyAtacks"></p>
+
+            </div>
+           </section>
+        </section>
+        <p></p>
+
+        <section class="reload-sec">
+            
+
+            <button id="reload">Reload</button>
+        </section>
+
+    </main>
+    <script src="./scripts/index.js"></script>
 
 </body>
 

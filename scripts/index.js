@@ -1,26 +1,43 @@
+const attackSec = document.getElementById('attackSelecSec')
+const messagesSection = document.getElementById('result')
+const playerAtacks = document.getElementById('playerAtacks')
+const enemyAtacks = document.getElementById('enemyAtacks')
+const spanPlayerLifes = document.getElementById('player-lifes')
+const spanEnemyLifes = document.getElementById('Enemi-lifes')
+const spanFEName = document.getElementById('fEName')
+const btnFigther = document.getElementById('btn')
+const selecSec = document.getElementById('figther-slect-sec')
+const reloadBtn = document.getElementById('reload')
+const btnWind = document.getElementById('wind')
+const btnEarth = document.getElementById('earth')
+const btnWater = document.getElementById('water')
+const btnFire = document.getElementById('fire')
+const inputAnng = document.getElementById('Anng')
+const inputKioshy = document.getElementById('Kioshy')
+const inptuKorra = document.getElementById('Korra')
+const inputRoku = document.getElementById('Roku')
+const spanFPName = document.getElementById('fPName')
+
 let playerAttack
 let enemyAttack
 let victoryword
+let playerLifes = 3
+let enemyLifes = 3
 
 const begin = () => {
-  const btnFigther = document.getElementById('btn')
   btnFigther.addEventListener('click', figtherPlayerSelection)
-  const btnFire = document.getElementById('fire')
   btnFire.addEventListener('click', fireAttack)
-  const btnWater = document.getElementById('water')
   btnWater.addEventListener('click', waterAttack)
-  const btnEarth = document.getElementById('earth')
   btnEarth.addEventListener('click', earthAttack)
-  const btnWind = document.getElementById('wind')
   btnWind.addEventListener('click', windAttack)
-
+  reloadBtn.addEventListener('click', reloadGame)
+  reloadBtn.disabled = true
+  enablebtn(true)
+  hiddenAtackSection('hidden-class')
 }
+
 const figtherPlayerSelection = () => {
-  const inputAnng = document.getElementById('Anng')
-  const inputKioshy = document.getElementById('Kioshy')
-  const inptuKorra = document.getElementById('Korra')
-  const inputRoku = document.getElementById('Roku')
-  const spanFPName = document.getElementById('fPName')
+  btnFigther.disabled = true
 
   if (inputAnng.checked) {
     alert('hello there Anng')
@@ -30,12 +47,10 @@ const figtherPlayerSelection = () => {
     alert('hello there Kioshy')
     console.log(inputKioshy)
     spanFPName.innerHTML = 'Kiohsy'
-
   } else if (inptuKorra.checked) {
     alert('hello there Korra')
     console.log(inptuKorra)
     spanFPName.innerHTML = 'Korra'
-
   } else if (inputRoku.checked) {
     alert('hello there Roku')
     console.log(inputRoku)
@@ -46,13 +61,12 @@ const figtherPlayerSelection = () => {
   }
 
   figtherEnemySelection()
+  enablebtn(false)
+  displayAtackSection()
 
 }
 
 const figtherEnemySelection = () => {
-
-  const spanFEName = document.getElementById('fEName')
-
   let randomNum = random(1, 4)
 
   if (randomNum === 1) {
@@ -65,6 +79,7 @@ const figtherEnemySelection = () => {
     spanFEName.innerHTML = 'Roku'
   }
 
+  displaySelecSec('hidden-class')
 }
 
 const fireAttack = () => {
@@ -88,7 +103,6 @@ const windAttack = () => {
 }
 
 const enemysAttackRandom = () => {
-
   let randomNumAttack = random(1, 4)
 
   if (randomNumAttack === 1) {
@@ -102,40 +116,105 @@ const enemysAttackRandom = () => {
   }
 
   setVictoryword()
-
 }
 
 const setVictoryword = () => {
-
   if (enemyAttack == 'Aire' && playerAttack == 'Tierra') {
     victoryword = 'Perdiste'
+    playerLifes--
+    spanPlayerLifes.innerHTML = playerLifes
   } else if (enemyAttack == 'Agua' && playerAttack == 'Tierra') {
     victoryword = 'Perdiste'
+    playerLifes--
+    spanPlayerLifes.innerHTML = playerLifes
   } else if (enemyAttack == 'Tierra' && playerAttack == 'Fuego') {
     victoryword = 'Perdiste'
+    playerLifes--
+    spanPlayerLifes.innerHTML = playerLifes
   } else if (enemyAttack == 'Agua' && playerAttack == 'Fuego') {
     victoryword = 'Perdiste'
+    playerLifes--
+    spanPlayerLifes.innerHTML = playerLifes
   } else if (enemyAttack == 'Fuego' && playerAttack == 'Aire') {
     victoryword = 'Perdiste'
+    playerLifes--
+    spanPlayerLifes.innerHTML = playerLifes
   } else if (enemyAttack == 'Aire' && playerAttack == 'Agua') {
     victoryword = 'Perdiste'
+    playerLifes--
+    spanPlayerLifes.innerHTML = playerLifes
   } else if (enemyAttack === playerAttack) {
     victoryword = 'Empate'
   } else {
     victoryword = 'Ganaste'
+    enemyLifes--
+    spanEnemyLifes.innerHTML = enemyLifes
   }
 
   createMenssage()
+  lifesCheck()
+}
+
+const lifesCheck = () => {
+  if (playerLifes === 0) {
+    alert('perdiste')
+    createFinalMenssage('perdiste, mejor suerte la prxima')
+  } else if (enemyLifes === 0) {
+    alert('ganaste')
+    createFinalMenssage('muy bien, ganaste')
+  }
 }
 
 const createMenssage = () => {
+  let atackResult = document.createElement('p')
+  let newPlayerAtack = document.createElement('p')
+  let newEnemyAtack = document.createElement('p')
 
-  const messagesSection = document.getElementById('messages')
+  messagesSection.innerHTML = victoryword;
+  newPlayerAtack.innerHTML = playerAttack;
+  newEnemyAtack.innerHTML = enemyAttack;
+  // paragraph.innerHTML = 'Tu peleador ataco con ' + playerAttack + ', y el peleador enemigo ataco con ' + enemyAttack + ', ' + victoryword;
 
+  playerAtacks.appendChild(newPlayerAtack)
+  enemyAtacks.appendChild(newEnemyAtack)
+}
+
+const createFinalMenssage = (finalResult) => {
   let paragraph = document.createElement('p')
-  paragraph.innerHTML = 'Tu peleador ataco con ' + playerAttack + ', y el peleador enemigo ataco con ' + enemyAttack + ', ' + victoryword;
+  messagesSection.innerHTML = finalResult
 
-  messagesSection.appendChild(paragraph)
+  enablebtn(true)
+}
+
+const enablebtn = (state) => {
+  btnFire.disabled = state
+  btnWater.disabled = state
+  btnEarth.disabled = state
+  btnWind.disabled = state
+
+  if (playerLifes === 0 || enemyLifes === 0) {
+    reloadBtn.disabled = false
+  } else {
+    reloadBtn.disabled = true
+  }
+}
+
+const hiddenAtackSection = (visibility) => {
+  attackSec.classList.add(visibility)
+  reloadBtn.classList.add(visibility)
+}
+
+const displayAtackSection = () => {
+  attackSec.classList.remove('hidden-class')
+  reloadBtn.classList.remove('hidden-class')
+}
+
+const displaySelecSec = (visibility) => {
+  selecSec.classList.add(visibility)
+}
+
+const reloadGame = () => {
+  location.reload()
 }
 
 const random = (min, max) => {

@@ -1,0 +1,26 @@
+@use 'variables';
+@use 'inicials';
+
+
+@mixin img($url, $width, $heigth, $background-size){
+    width: $width;
+    height: $heigth;
+    background-image:url($url);
+    background-size: $background-size;
+    background-repeat: no-repeat;
+}
+
+@mixin button($width, $heigth, $font-size, $letter-spacing, $background-color, $color, $border-radius, $padding, $font-family){
+    width: $width;
+    height: $heigth;
+    font-size: $font-size;
+    letter-spacing: $letter-spacing;
+    background-color: $background-color;
+    color: $color;
+    border-radius: $border-radius;
+    padding: $padding;
+    font-family: $font-family ;
+    &:hover {
+        cursor: pointer;
+    }
+}

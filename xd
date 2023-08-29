@@ -1,0 +1,8 @@
+enablebtn(true)
+enablebtn(false)
+const enablebtn = (state) => {
+    btnFire.disabled = state
+    btnWater.disabled = state
+    btnEarth.disabled = state
+    btnWind.disabled = state
+  }
