@@ -12,16 +12,18 @@ const btnWind = document.getElementById('wind')
 const btnEarth = document.getElementById('earth')
 const btnWater = document.getElementById('water')
 const btnFire = document.getElementById('fire')
-const inputAnng = document.getElementById('Anng')
-const inputKioshy = document.getElementById('Kioshy')
-const inptuKorra = document.getElementById('Korra')
-const inputRoku = document.getElementById('Roku')
 const spanFPName = document.getElementById('fPName')
+const cardsContainer = document.getElementById('cards-container')
 
+let inputAnng
+let inputKioshy
+let inptuKorra
+let inputRoku
 let figthers = []
 let playerAttack
 let enemyAttack
 let victoryword
+let figtherOption
 let playerLifes = 3
 let enemyLifes = 3
 
@@ -92,7 +94,26 @@ roku.ataques.push(
   { nombre: '🔥', id: 'fire' },
   { nombre: '🔥', id: 'fire' },
 )
+
 const begin = () => {
+
+  figthers.forEach((figther) => {
+    figtherOption = `
+  <input type="radio" name="peleador" id=${figther.nombre} />
+                <label class="figther-card ${figther.nombre}" for=${figther.nombre}>
+                    <p>${figther.nombre}</p>
+                    <img src=${figther.foto} alt="">
+                </label>
+  `
+    cardsContainer.innerHTML += figtherOption
+
+    inputAnng = document.getElementById('Ang')
+    inputKioshy = document.getElementById('Kioshy')
+    inptuKorra = document.getElementById('Korra')
+    inputRoku = document.getElementById('Roku')
+
+  })
+
   btnFigther.addEventListener('click', figtherPlayerSelection)
   btnFire.addEventListener('click', fireAttack)
   btnWater.addEventListener('click', waterAttack)
