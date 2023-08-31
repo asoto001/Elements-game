@@ -18,12 +18,80 @@ const inptuKorra = document.getElementById('Korra')
 const inputRoku = document.getElementById('Roku')
 const spanFPName = document.getElementById('fPName')
 
+let figthers = []
 let playerAttack
 let enemyAttack
 let victoryword
 let playerLifes = 3
 let enemyLifes = 3
 
+class Figther {
+  constructor(nombre, foto, vida) {
+    this.nombre = nombre
+    this.foto = foto
+    this.vida = vida
+    this.ataques = []
+  }
+}
+
+let ang = new Figther('Ang', './images/Ang1.png', 5)
+let kioshy = new Figther('Kioshy', './images/Kyoshi1.png', 5)
+let korra = new Figther('Korra', './images/Korra1.png', 5)
+let roku = new Figther('Roku', './images/Roku.png', 5)
+
+figthers.push(ang, kioshy, korra, roku)
+
+ang.ataques.push(
+  { nombre: '💧', id: 'water' },
+  { nombre: '💧', id: 'water' },
+  { nombre: '💧', id: 'water' },
+  { nombre: '🌪', id: 'wind' },
+  { nombre: '🌪', id: 'wind' },
+  { nombre: '🌪', id: 'wind' },
+  { nombre: '🌪', id: 'wind' },
+  { nombre: '🔥', id: 'fire' },
+  { nombre: '🌱', id: 'earth' },
+  { nombre: '🌱', id: 'earth' }
+)
+
+kioshy.ataques.push(
+  { nombre: '💧', id: 'water' },
+  { nombre: '🌪', id: 'wind' },
+  { nombre: '🌱', id: 'earth' },
+  { nombre: '🌱', id: 'earth' },
+  { nombre: '🌱', id: 'earth' },
+  { nombre: '🌱', id: 'earth' },
+  { nombre: '🌱', id: 'earth' },
+  { nombre: '🔥', id: 'fire' },
+  { nombre: '🔥', id: 'fire' },
+  { nombre: '🔥', id: 'fire' },
+)
+
+korra.ataques.push(
+  { nombre: '💧', id: 'water' },
+  { nombre: '💧', id: 'water' },
+  { nombre: '💧', id: 'water' },
+  { nombre: '💧', id: 'water' },
+  { nombre: '🌪', id: 'wind' },
+  { nombre: '🌱', id: 'earth' },
+  { nombre: '🌱', id: 'earth' },
+  { nombre: '🔥', id: 'fire' },
+  { nombre: '🔥', id: 'fire' },
+  { nombre: '🔥', id: 'fire' },
+)
+
+roku.ataques.push(
+  { nombre: '💧', id: 'water' },
+  { nombre: '🌪', id: 'wind' },
+  { nombre: '🌪', id: 'wind' },
+  { nombre: '🌪', id: 'wind' },
+  { nombre: '🌪', id: 'wind' },
+  { nombre: '🌱', id: 'earth' },
+  { nombre: '🔥', id: 'fire' },
+  { nombre: '🔥', id: 'fire' },
+  { nombre: '🔥', id: 'fire' },
+  { nombre: '🔥', id: 'fire' },
+)
 const begin = () => {
   btnFigther.addEventListener('click', figtherPlayerSelection)
   btnFire.addEventListener('click', fireAttack)
