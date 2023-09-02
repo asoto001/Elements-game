@@ -20,6 +20,7 @@ let inputKioshy
 let inptuKorra
 let inputRoku
 let figthers = []
+let playerFigther
 let playerAttack
 let enemyAttack
 let victoryword
@@ -131,42 +132,50 @@ const figtherPlayerSelection = () => {
   if (inputAnng.checked) {
     alert('hello there Anng')
     console.log(inputAnng)
-    spanFPName.innerHTML = 'Anng'
+    spanFPName.innerHTML = inputAnng.id
+    playerFigther = inputAnng.id
   } else if (inputKioshy.checked) {
     alert('hello there Kioshy')
     console.log(inputKioshy)
-    spanFPName.innerHTML = 'Kiohsy'
+    spanFPName.innerHTML = inputKioshy.id
+    playerFigther = inputKioshy.id
   } else if (inptuKorra.checked) {
     alert('hello there Korra')
     console.log(inptuKorra)
-    spanFPName.innerHTML = 'Korra'
+    spanFPName.innerHTML = inptuKorra.id
+    playerFigther = inptuKorra.id
   } else if (inputRoku.checked) {
     alert('hello there Roku')
     console.log(inputRoku)
-    spanFPName.innerHTML = 'Roku'
+    spanFPName.innerHTML = inputRoku.id
+    playerFigther = inputRoku.id
   } else {
     alert('o Shit! here we go again')
     spanFPName.innerHTML = 'Cagada!'
   }
 
+  extractAtacks(playerFigther)
   figtherEnemySelection()
   enablebtn(false)
   displayAtackSection()
 
 }
 
-const figtherEnemySelection = () => {
-  let randomNum = random(1, 4)
+extractAtacks :() => {
+  let atacks
 
-  if (randomNum === 1) {
-    spanFEName.innerHTML = 'Anng'
-  } else if (randomNum === 2) {
-    spanFEName.innerHTML = 'kioshy'
-  } else if (randomNum === 3) {
-    spanFEName.innerHTML = 'Korra'
-  } else if (randomNum === 4) {
-    spanFEName.innerHTML = 'Roku'
-  }
+  figthers.forEac((figther) => {
+    if (playerFigther === figther.name) {
+      atacks = figther.ataques
+    }
+  })
+  showAtacks(atacks)
+}
+
+const figtherEnemySelection = () => {
+  let randomNum = random(0, figthers.length -1)
+
+  spanFPName.innerHTML = figthers[randomNum].nombre
 
   displaySelecSec('hidden-class')
 }
