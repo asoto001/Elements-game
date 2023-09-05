@@ -8,12 +8,9 @@ const spanFEName = document.getElementById('fEName')
 const btnFigther = document.getElementById('btn')
 const selecSec = document.getElementById('figther-slect-sec')
 const reloadBtn = document.getElementById('reload')
-const btnWind = document.getElementById('wind')
-const btnEarth = document.getElementById('earth')
-const btnWater = document.getElementById('water')
-const btnFire = document.getElementById('fire')
 const spanFPName = document.getElementById('fPName')
 const cardsContainer = document.getElementById('cards-container')
+const atacksContainer = document.getElementById('atacksContainer')
 
 let inputAnng
 let inputKioshy
@@ -21,12 +18,19 @@ let inptuKorra
 let inputRoku
 let figthers = []
 let playerFigther
-let playerAttack
+let playerAttack = []
 let enemyAttack
+let figthersAtacks
+let btnWind
+let btnEarth
+let btnWater
+let btnFire
+let buttons = []
 let victoryword
 let figtherOption
 let playerLifes = 3
 let enemyLifes = 3
+
 
 class Figther {
   constructor(nombre, foto, vida) {
@@ -42,7 +46,6 @@ let kioshy = new Figther('Kioshy', './images/Kyoshi1.png', 5)
 let korra = new Figther('Korra', './images/Korra1.png', 5)
 let roku = new Figther('Roku', './images/Roku.png', 5)
 
-figthers.push(ang, kioshy, korra, roku)
 
 ang.ataques.push(
   { nombre: '💧', id: 'water' },
@@ -95,6 +98,7 @@ roku.ataques.push(
   { nombre: '🔥', id: 'fire' },
   { nombre: '🔥', id: 'fire' },
 )
+figthers.push(ang, kioshy, korra, roku)
 
 const begin = () => {
 
@@ -116,13 +120,9 @@ const begin = () => {
   })
 
   btnFigther.addEventListener('click', figtherPlayerSelection)
-  btnFire.addEventListener('click', fireAttack)
-  btnWater.addEventListener('click', waterAttack)
-  btnEarth.addEventListener('click', earthAttack)
-  btnWind.addEventListener('click', windAttack)
   reloadBtn.addEventListener('click', reloadGame)
   reloadBtn.disabled = true
-  enablebtn(true)
+
   hiddenAtackSection('hidden-class')
 }
 
@@ -161,44 +161,87 @@ const figtherPlayerSelection = () => {
 
 }
 
-extractAtacks :() => {
+extractAtacks = (playerFigther) => {
   let atacks
 
-  figthers.forEac((figther) => {
-    if (playerFigther === figther.name) {
-      atacks = figther.ataques
+  for (let i = 0; i < figthers.length; i++) {
+    if (playerFigther === figthers[i].nombre) {
+      atacks = figthers[i].ataques
     }
-  })
+  }
   showAtacks(atacks)
 }
 
+showAtacks = (atacks) => {
+
+  atacks.forEach((atack) => {
+    figthersAtacks = `<button class="btns-atacks__fire btns aButtons" id=${atack.id}>${atack.nombre}</button>`
+
+    atacksContainer.innerHTML += figthersAtacks
+  })
+  btnWind = document.getElementById('wind')
+  btnEarth = document.getElementById('earth')
+  btnWater = document.getElementById('water')
+  btnFire = document.getElementById('fire')
+  buttons = document.querySelectorAll('.aButtons')
+
+  
+  enablebtn(true)
+}
+
+const atackSequence = () => {
+  buttons.forEach((button) => {
+    button.addEventListener('click', (e) => {
+      console.log(e)
+      if (e.target.textContent === '🔥') {
+       playerAttack.push('Fuego')
+       console.log(playerAttack)
+       button.style.background = '#112f58'
+      } else if (e.target.textContent === '💧') {
+        playerAttack.push('Agua')
+        console.log(playerAttack)
+        button.style.background = '#112f58'
+      } else if (e.target.textContent === '🌱') {
+        playerAttack.push('Tierra')
+        console.log(playerAttack)
+        button.style.background = '#112f58'
+      } else  {
+        playerAttack.push('Aire')
+        console.log(playerAttack)
+        button.style.background = '#112f58'
+      }
+    })
+  })
+}
+
 const figtherEnemySelection = () => {
-  let randomNum = random(0, figthers.length -1)
+  let randomNum = random(0, figthers.length - 1)
 
   spanFPName.innerHTML = figthers[randomNum].nombre
 
   displaySelecSec('hidden-class')
+  atackSequence()
 }
 
-const fireAttack = () => {
-  playerAttack = 'Fuego'
-  enemysAttackRandom()
-}
+// const fireAttack = () => {
+//   playerAttack = 'Fuego'
+//   enemysAttackRandom()
+// }
 
-const waterAttack = () => {
-  playerAttack = 'Agua'
-  enemysAttackRandom()
-}
+// const waterAttack = () => {
+//   playerAttack = 'Agua'
+//   enemysAttackRandom()
+// }
 
-const earthAttack = () => {
-  playerAttack = 'Tierra'
-  enemysAttackRandom()
-}
+// const earthAttack = () => {
+//   playerAttack = 'Tierra'
+//   enemysAttackRandom()
+// }
 
-const windAttack = () => {
-  playerAttack = 'Aire'
-  enemysAttackRandom()
-}
+// const windAttack = () => {
+//   playerAttack = 'Aire'
+//   enemysAttackRandom()
+// }
 
 const enemysAttackRandom = () => {
   let randomNumAttack = random(1, 4)
