@@ -19,8 +19,11 @@ let inputRoku
 let figthers = []
 let playerFigther
 let playerAttack = []
-let enemyAttack
+let enemyAttack = []
 let figthersAtacks
+let enemyFigthersAtacks
+let indexPlayerAtack
+let indexEnemyAtack
 let btnWind
 let btnEarth
 let btnWater
@@ -48,55 +51,55 @@ let roku = new Figther('Roku', './images/Roku.png', 5)
 
 
 ang.ataques.push(
-  { nombre: '💧', id: 'water' },
-  { nombre: '💧', id: 'water' },
-  { nombre: '💧', id: 'water' },
-  { nombre: '🌪', id: 'wind' },
-  { nombre: '🌪', id: 'wind' },
-  { nombre: '🌪', id: 'wind' },
-  { nombre: '🌪', id: 'wind' },
-  { nombre: '🔥', id: 'fire' },
-  { nombre: '🌱', id: 'earth' },
-  { nombre: '🌱', id: 'earth' }
+  { nombre: '💧', id: 'Agua', number: 0 },
+  { nombre: '💧', id: 'Agua', number: 1 },
+  { nombre: '💧', id: 'Agua', number: 2 },
+  { nombre: '🌪', id: 'Aire', number: 3 },
+  { nombre: '🌪', id: 'Aire', number: 4 },
+  { nombre: '🌪', id: 'Aire', number: 5 },
+  { nombre: '🌪', id: 'Aire', number: 6 },
+  { nombre: '🔥', id: 'Fuego', number: 7 },
+  { nombre: '🌱', id: 'Tierra', number: 8 },
+  { nombre: '🌱', id: 'Tierra', number: 9 }
 )
 
 kioshy.ataques.push(
-  { nombre: '💧', id: 'water' },
-  { nombre: '🌪', id: 'wind' },
-  { nombre: '🌱', id: 'earth' },
-  { nombre: '🌱', id: 'earth' },
-  { nombre: '🌱', id: 'earth' },
-  { nombre: '🌱', id: 'earth' },
-  { nombre: '🌱', id: 'earth' },
-  { nombre: '🔥', id: 'fire' },
-  { nombre: '🔥', id: 'fire' },
-  { nombre: '🔥', id: 'fire' },
+  { nombre: '💧', id: 'Agua', number: 0 },
+  { nombre: '🌪', id: 'Aire', number: 1 },
+  { nombre: '🌱', id: 'Tierra', number: 2 },
+  { nombre: '🌱', id: 'Tierra', number: 3 },
+  { nombre: '🌱', id: 'Tierra', number: 4 },
+  { nombre: '🌱', id: 'Tierra', number: 5 },
+  { nombre: '🌱', id: 'Tierra', number: 6 },
+  { nombre: '🔥', id: 'Fuego', number: 7 },
+  { nombre: '🔥', id: 'Fuego', number: 8 },
+  { nombre: '🔥', id: 'Fuego', number: 9 },
 )
 
 korra.ataques.push(
-  { nombre: '💧', id: 'water' },
-  { nombre: '💧', id: 'water' },
-  { nombre: '💧', id: 'water' },
-  { nombre: '💧', id: 'water' },
-  { nombre: '🌪', id: 'wind' },
-  { nombre: '🌱', id: 'earth' },
-  { nombre: '🌱', id: 'earth' },
-  { nombre: '🔥', id: 'fire' },
-  { nombre: '🔥', id: 'fire' },
-  { nombre: '🔥', id: 'fire' },
+  { nombre: '💧', id: 'Agua', number: 0 },
+  { nombre: '💧', id: 'Agua', number: 1 },
+  { nombre: '💧', id: 'Agua', number: 2 },
+  { nombre: '💧', id: 'Agua', number: 3 },
+  { nombre: '🌪', id: 'Aire', number: 4 },
+  { nombre: '🌱', id: 'Tierra', number: 5 },
+  { nombre: '🌱', id: 'Tierra', number: 6 },
+  { nombre: '🔥', id: 'Fuego', number: 7 },
+  { nombre: '🔥', id: 'Fuego', number: 8 },
+  { nombre: '🔥', id: 'Fuego', number: 9 },
 )
 
 roku.ataques.push(
-  { nombre: '💧', id: 'water' },
-  { nombre: '🌪', id: 'wind' },
-  { nombre: '🌪', id: 'wind' },
-  { nombre: '🌪', id: 'wind' },
-  { nombre: '🌪', id: 'wind' },
-  { nombre: '🌱', id: 'earth' },
-  { nombre: '🔥', id: 'fire' },
-  { nombre: '🔥', id: 'fire' },
-  { nombre: '🔥', id: 'fire' },
-  { nombre: '🔥', id: 'fire' },
+  { nombre: '💧', id: 'Agua', number: 0 },
+  { nombre: '🌪', id: 'Aire', number: 1 },
+  { nombre: '🌪', id: 'Aire', number: 2 },
+  { nombre: '🌪', id: 'Aire', number: 3 },
+  { nombre: '🌪', id: 'Aire', number: 4 },
+  { nombre: '🌱', id: 'Tierra', number: 5 },
+  { nombre: '🔥', id: 'Fuego', number: 6 },
+  { nombre: '🔥', id: 'Fuego', number: 7 },
+  { nombre: '🔥', id: 'Fuego', number: 8 },
+  { nombre: '🔥', id: 'Fuego', number: 9 },
 )
 figthers.push(ang, kioshy, korra, roku)
 
@@ -179,13 +182,13 @@ showAtacks = (atacks) => {
 
     atacksContainer.innerHTML += figthersAtacks
   })
-  btnWind = document.getElementById('wind')
-  btnEarth = document.getElementById('earth')
-  btnWater = document.getElementById('water')
-  btnFire = document.getElementById('fire')
+  btnWind = document.getElementById('Aire')
+  btnEarth = document.getElementById('Tierra')
+  btnWater = document.getElementById('Agua')
+  btnFire = document.getElementById('Fuego')
   buttons = document.querySelectorAll('.aButtons')
 
-  
+
   enablebtn(true)
 }
 
@@ -194,9 +197,9 @@ const atackSequence = () => {
     button.addEventListener('click', (e) => {
       console.log(e)
       if (e.target.textContent === '🔥') {
-       playerAttack.push('Fuego')
-       console.log(playerAttack)
-       button.style.background = '#112f58'
+        playerAttack.push('Fuego')
+        console.log(playerAttack)
+        button.style.background = '#112f58'
       } else if (e.target.textContent === '💧') {
         playerAttack.push('Agua')
         console.log(playerAttack)
@@ -205,61 +208,62 @@ const atackSequence = () => {
         playerAttack.push('Tierra')
         console.log(playerAttack)
         button.style.background = '#112f58'
-      } else  {
+      } else {
         playerAttack.push('Aire')
         console.log(playerAttack)
         button.style.background = '#112f58'
       }
+      enemysAttackRandom()
     })
   })
+
 }
 
 const figtherEnemySelection = () => {
   let randomNum = random(0, figthers.length - 1)
 
   spanFPName.innerHTML = figthers[randomNum].nombre
+  enemyFigthersAtacks = figthers[randomNum].ataques
 
   displaySelecSec('hidden-class')
   atackSequence()
 }
 
-// const fireAttack = () => {
-//   playerAttack = 'Fuego'
-//   enemysAttackRandom()
-// }
-
-// const waterAttack = () => {
-//   playerAttack = 'Agua'
-//   enemysAttackRandom()
-// }
-
-// const earthAttack = () => {
-//   playerAttack = 'Tierra'
-//   enemysAttackRandom()
-// }
-
-// const windAttack = () => {
-//   playerAttack = 'Aire'
-//   enemysAttackRandom()
-// }
-
 const enemysAttackRandom = () => {
-  let randomNumAttack = random(1, 4)
+  let randomNumAttack = random(0, enemyFigthersAtacks.length - 1)
 
-  if (randomNumAttack === 1) {
-    enemyAttack = 'Fuego'
-  } else if (randomNumAttack === 2) {
-    enemyAttack = 'Agua'
-  } else if (randomNumAttack === 3) {
-    enemyAttack = 'Tierra'
-  } else if (randomNumAttack === 4) {
-    enemyAttack = 'Aire'
+  if (randomNumAttack === enemyFigthersAtacks[randomNumAttack].number) {
+    enemyAttack.push(enemyFigthersAtacks[randomNumAttack].id)
+
+  } else {
+console.log('¡Mis putos tomates!')
+   }
+  console.log(enemyAttack)
+  fightStart()
+  // setVictoryword()
+}
+
+const fightStart = () => {
+  if (playerAttack.length === 10) {
+    setVictoryword()
   }
+}
 
-  setVictoryword()
+const indexOpponents = (player, enemy) => {
+  indexPlayerAtack = enemyAttack[player]
+  indexEnemyAtack = enemyAtacks[enemy]
 }
 
 const setVictoryword = () => {
+
+for (let index = 0; index < playerAttack.length; index++) {
+  if (playerAttack[index] === enemyAttack[index]) {
+    indexOpponents(index, index)
+    victoryword = 'Empate'
+  }
+  
+}
+
   if (enemyAttack == 'Aire' && playerAttack == 'Tierra') {
     victoryword = 'Perdiste'
     playerLifes--
@@ -312,8 +316,8 @@ const createMenssage = () => {
   let newEnemyAtack = document.createElement('p')
 
   messagesSection.innerHTML = victoryword;
-  newPlayerAtack.innerHTML = playerAttack;
-  newEnemyAtack.innerHTML = enemyAttack;
+  newPlayerAtack.innerHTML = indexPlayerAtack;
+  newEnemyAtack.innerHTML = indexEnemyAtack;
   // paragraph.innerHTML = 'Tu peleador ataco con ' + playerAttack + ', y el peleador enemigo ataco con ' + enemyAttack + ', ' + victoryword;
 
   playerAtacks.appendChild(newPlayerAtack)
