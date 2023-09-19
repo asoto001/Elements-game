@@ -29,8 +29,9 @@ let btnEarth
 let btnWater
 let btnFire
 let buttons = []
-let victoryword
 let figtherOption
+let playerVictories = 0
+let enemyVictories = 0
 let playerLifes = 3
 let enemyLifes = 3
 
@@ -159,7 +160,6 @@ const figtherPlayerSelection = () => {
 
   extractAtacks(playerFigther)
   figtherEnemySelection()
-  enablebtn(false)
   displayAtackSection()
 
 }
@@ -189,29 +189,33 @@ showAtacks = (atacks) => {
   buttons = document.querySelectorAll('.aButtons')
 
 
-  enablebtn(true)
+  
 }
 
 const atackSequence = () => {
   buttons.forEach((button) => {
     button.addEventListener('click', (e) => {
-      console.log(e)
+      
       if (e.target.textContent === '🔥') {
         playerAttack.push('Fuego')
         console.log(playerAttack)
         button.style.background = '#112f58'
+        button.disabled = true
       } else if (e.target.textContent === '💧') {
         playerAttack.push('Agua')
         console.log(playerAttack)
         button.style.background = '#112f58'
+        button.disabled = true
       } else if (e.target.textContent === '🌱') {
         playerAttack.push('Tierra')
         console.log(playerAttack)
         button.style.background = '#112f58'
+        button.disabled = true
       } else {
         playerAttack.push('Aire')
         console.log(playerAttack)
         button.style.background = '#112f58'
+        button.disabled = true
       }
       enemysAttackRandom()
     })
@@ -240,7 +244,6 @@ console.log('¡Mis putos tomates!')
    }
   console.log(enemyAttack)
   fightStart()
-  // setVictoryword()
 }
 
 const fightStart = () => {
@@ -250,8 +253,8 @@ const fightStart = () => {
 }
 
 const indexOpponents = (player, enemy) => {
-  indexPlayerAtack = enemyAttack[player]
-  indexEnemyAtack = enemyAtacks[enemy]
+  indexPlayerAtack = playerAttack[player]
+  indexEnemyAtack = enemyAttack[enemy]
 }
 
 const setVictoryword = () => {
@@ -259,88 +262,85 @@ const setVictoryword = () => {
 for (let index = 0; index < playerAttack.length; index++) {
   if (playerAttack[index] === enemyAttack[index]) {
     indexOpponents(index, index)
-    victoryword = 'Empate'
+    createMenssage('Empate') 
+  } else if (playerAttack[index] == 'Fuego' && enemyAttack[index] == 'Aire') {
+    indexOpponents(index, index)
+    createMenssage('Ganaste')
+    playerVictories++
+    spanPlayerLifes.innerHTML = playerVictories
+  } else if (playerAttack[index] == 'Aire' && enemyAttack[index] == 'Tierra') {
+    indexOpponents(index, index)
+    createMenssage('Ganaste')
+    playerVictories++
+    spanPlayerLifes.innerHTML = playerVictories
+  } else if (playerAttack[index] == 'Tierra' && enemyAttack[index] == 'Fuego') {
+    indexOpponents(index, index)
+    createMenssage('Ganaste')
+    playerVictories++
+    spanPlayerLifes.innerHTML = playerVictories
+  } else if (playerAttack[index] == 'Agua' && enemyAttack[index] == 'Tierra') {
+    indexOpponents(index, index)
+    createMenssage('Ganaste')
+    playerVictories++
+    spanPlayerLifes.innerHTML = playerVictories
+  } else if (playerAttack[index] == 'Agua' && enemyAttack[index] =='Fuego') {
+    indexOpponents(index, index)
+    createMenssage('Ganaste')
+    playerVictories++
+    spanPlayerLifes.innerHTML = playerVictories
+  }else if (playerAttack[index] == 'Aire' && enemyAttack[index] == 'Agua') {
+    indexOpponents(index, index)
+    createMenssage('Ganaste')
+    playerVictories++
+    spanPlayerLifes.innerHTML = playerVictories
+  } else {
+    indexOpponents(index, index)
+    createMenssage('Perdiste')
+    enemyVictories++
+    spanEnemyLifes.innerHTML = enemyVictories
   }
   
 }
-
-  if (enemyAttack == 'Aire' && playerAttack == 'Tierra') {
-    victoryword = 'Perdiste'
-    playerLifes--
-    spanPlayerLifes.innerHTML = playerLifes
-  } else if (enemyAttack == 'Agua' && playerAttack == 'Tierra') {
-    victoryword = 'Perdiste'
-    playerLifes--
-    spanPlayerLifes.innerHTML = playerLifes
-  } else if (enemyAttack == 'Tierra' && playerAttack == 'Fuego') {
-    victoryword = 'Perdiste'
-    playerLifes--
-    spanPlayerLifes.innerHTML = playerLifes
-  } else if (enemyAttack == 'Agua' && playerAttack == 'Fuego') {
-    victoryword = 'Perdiste'
-    playerLifes--
-    spanPlayerLifes.innerHTML = playerLifes
-  } else if (enemyAttack == 'Fuego' && playerAttack == 'Aire') {
-    victoryword = 'Perdiste'
-    playerLifes--
-    spanPlayerLifes.innerHTML = playerLifes
-  } else if (enemyAttack == 'Aire' && playerAttack == 'Agua') {
-    victoryword = 'Perdiste'
-    playerLifes--
-    spanPlayerLifes.innerHTML = playerLifes
-  } else if (enemyAttack === playerAttack) {
-    victoryword = 'Empate'
-  } else {
-    victoryword = 'Ganaste'
-    enemyLifes--
-    spanEnemyLifes.innerHTML = enemyLifes
-  }
-
   createMenssage()
   lifesCheck()
 }
 
 const lifesCheck = () => {
-  if (playerLifes === 0) {
+  if (playerVictories < enemyVictories ) {
     alert('perdiste')
-    createFinalMenssage('perdiste, mejor suerte la prxima')
-  } else if (enemyLifes === 0) {
+    createFinalMenssage('perdiste, mejor suerte la proxima')
+  } else if (playerVictories > enemyVictories) {
     alert('ganaste')
-    createFinalMenssage('muy bien, ganaste')
+    createFinalMenssage('muy bien, ganaste!!')
+  } else {
+    createFinalMenssage('Tenemos unempate!!')
   }
 }
 
-const createMenssage = () => {
-  let atackResult = document.createElement('p')
+const createMenssage = (victoryword) => {
+  
   let newPlayerAtack = document.createElement('p')
   let newEnemyAtack = document.createElement('p')
 
   messagesSection.innerHTML = victoryword;
   newPlayerAtack.innerHTML = indexPlayerAtack;
   newEnemyAtack.innerHTML = indexEnemyAtack;
-  // paragraph.innerHTML = 'Tu peleador ataco con ' + playerAttack + ', y el peleador enemigo ataco con ' + enemyAttack + ', ' + victoryword;
-
+ 
   playerAtacks.appendChild(newPlayerAtack)
   enemyAtacks.appendChild(newEnemyAtack)
 }
 
 const createFinalMenssage = (finalResult) => {
-  let paragraph = document.createElement('p')
   messagesSection.innerHTML = finalResult
-
-  enablebtn(true)
+  enablebtn()
 }
 
-const enablebtn = (state) => {
-  btnFire.disabled = state
-  btnWater.disabled = state
-  btnEarth.disabled = state
-  btnWind.disabled = state
+const enablebtn = () => {
 
-  if (playerLifes === 0 || enemyLifes === 0) {
-    reloadBtn.disabled = false
-  } else {
+  if (playerVictories === 0 || enemyVictories === 0) {
     reloadBtn.disabled = true
+  } else {
+    reloadBtn.disabled = false
   }
 }
 
